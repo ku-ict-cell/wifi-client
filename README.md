@@ -7,58 +7,100 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## About Git Branching
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Git Guidelines for Epaper Project
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**New Feature:**<br>
+To create a new feature, whatever branch you are, checkout to master branch (this can change in some cases, discuss in pre-production section).
+```
+git checkout master
+```
+Then pull from master branch.
+```
+git pull origin master
+```
+Now checkout to new branch you want to start working.
+Please keep in mind that, the branch name should start with the ticket number and then the feature name like ```SW-4-delivery-page```.
 
-## Learning Laravel
+```
+git checkout <branch-name>
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+When your feature is done from your side, push your code to git (It's a good practice to push multiple time a day)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+git add .
+git commit -m "<commit message>"
+git push origin <branch-name-SW-4-delivery-page>
+```
+Here remember one thing __*never pull `development` from your branch*__. It can came with multiple unfinished work.
+Now you have to send it for testing.<br>
 
-## Laravel Sponsors
+Checkout to development branch,
+```
+git checkout development
+```
+Update local with remote
+```
+git pull origin development
+```
+Merge feature branch with development
+```
+git merge <branch-name-SW-4-delivery-page>
+```
+If there is any conflict arise resolve this and push to `development` branch.<br>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Now go to staging server, pull development, if it's backend work then voila you're done.<br>
+If it's frontend then you have to do some extra work to deploy it.<br>
 
-### Premium Partners
+Go to working directory,
+```
+cd /var/www/epaper
+```
+or the working directory,
+pull code from development branch,
+```
+git pull origin development
+```
+If it's the frontend, after pulling the code run
+```
+npm run build
+```
+If there is any permission issue then run it with `sudo`.<br>
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Kill the 3000 port as previous version is running on that port.
+```
+sudo kill -9 $(sudo lsof -t -i:3000)
+```
+Now move your ticket from `In Progress` to `Ready for Test`. <br>
+Congratulations, you successfully deployed in staging server.<br>
 
-## Contributing
+After testing if any issue arise then solve it in your feature branch `<branch_name>`, push to git.<br>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Then checkout in development, pull from it, merge it in development branch(resolve conflict if available). Push and deploy you work then again pass for testing.<br>
 
-## Code of Conduct
+Now if your work passes all the test, create a __*Pull Request(PR)*__ with from your feature branch to destination branch `pre-production`.<br>
+If more than one developer working in the project, select a reviewer for your code to review. There will be a column in the Jira board for code review. The developer who create the __*PR*__  will not merge the code.<br>
+Instead, the other developer who is reviewing the code will merge it or you can merge the code after it is approved by the reviewer (the code quality of both developer will improve in this manner).
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+If the reviewer made a suggestion for your code, discuss with the reviewer and change accordingly.
+Again move the ticket to `Ready for Test`. QA will check it again.
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Now your finished work is in the pre-production branch.
 
-## License
+Do not delete your feature branch until the release is done. The client can ask to deploy a feature at any time. So we can merge it with master then deploy it.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+You can start working on a new feature.
+
+**Pre-production Branch:**<br>
+When a feature is dependent on other feature then the after finishing the feature please create new branch from the `pre-production` branch.
+
+**Production Server**:<br>
+When you have to make a release, create a __*Pull Request(PR)*__ from the `pre-production` branch to destination `master` branch.<br>
+
+Scan trough the code and then merge it. Remember to make a release with version number and the features that going to that release.
+
+__*The production server only pull from master branch. There will be no other branch in the production server.*__
