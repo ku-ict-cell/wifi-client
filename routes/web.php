@@ -51,7 +51,7 @@ Route::get('/callback', function (Request $request) {
         'code'          => $request->code,
     ]);
 
-    echo '<h1>Welcome to Khulna University Library</h1>';
+    echo '<h1>Welcome to Khulna University Central Library</h1>';
     print_r($response->json());
 });
 
@@ -67,6 +67,7 @@ Route::post('login',function(Request $request){
             'password'      => $request->password,
         ]
     ]);
+    echo '<h1>Welcome to Khulna University Central Library</h1>';
     return $response->getBody();
 } catch (\GuzzleHttp\Exception\BadResponseException $e) {
     if ($e->getCode() === 400) {
