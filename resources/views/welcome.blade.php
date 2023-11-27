@@ -25,7 +25,7 @@
 <!-- Body -->
 <body>
 
-	<h1 style="font-family:times;">Khulna University<br/> Central Library</h1>
+	<h1 style="font-family:times;">Khulna University<br/> Central Library <br/> Login System Integrated With KU Accounts</h1>
 
 	<div class="container w3layouts agileits">
 
