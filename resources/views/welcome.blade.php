@@ -25,7 +25,7 @@
 <!-- Body -->
 <body>
 
-	<h1 style="font-family:times; color: #000; margin-top: -4px;">Khulna University<br/> Central Wifi <br/> Login System Integrated With KU Accounts</h1>
+	<h1 style="font-family:times; color: #000; margin-top: -4px;">Khulna University<br/> Public Wifi <br/> Login System Integrated With KU Accounts</h1>
 
 	<div class="container w3layouts agileits">
 
