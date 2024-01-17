@@ -8,7 +8,7 @@
 </p>
 
 ## About This Prototype
-Actually this project is made for the prototype purpose to simplify how 3rd party(e.g library here) app should implement their login service with Khulna University Accounts. 
+Actually this project is made for the prototype purpose to simplify how 3rd party(e.g WiFi here) app should implement their login service with Khulna University Accounts. 
 
 This project is based on Laravel Passport. We've implemented both client login using general login service and oAuth2.0 service. 
 
