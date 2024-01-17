@@ -25,7 +25,7 @@
 <!-- Body -->
 <body>
 
-	<h1 style="font-family:times;">Khulna University<br/> Central Library <br/> Login System Integrated With KU Accounts</h1>
+	<h1 style="font-family:times; color: #000; margin-top: -4px;">Khulna University<br/> Central Wifi <br/> Login System Integrated With KU Accounts</h1>
 
 	<div class="container w3layouts agileits">
 
@@ -78,7 +78,7 @@
 	</div>
 
 	<div class="footer w3layouts agileits">
-		<p> &copy; {{date('Y')}} Library Patron Login Form. All Rights Reserved | Developed by <a href="https://ku.ac.bd" target="_blank">Khulna University ICT CELL</a></p>
+		<p> &copy; {{date('Y')}} Wifi User Login Form. All Rights Reserved | Developed by <a href="https://ku.ac.bd" target="_blank">Khulna University ICT CELL</a></p>
 	</div>
 
 </body>

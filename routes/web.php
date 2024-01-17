@@ -71,7 +71,11 @@ Route::post('login',function(Request $request){
     return $response->getBody();
 } catch (\GuzzleHttp\Exception\BadResponseException $e) {
     if ($e->getCode() === 400) {
-        return response()->json('400'.$e->getMessage(), $e->getCode());
+        return response()->json([
+            'message'=>$e->getMessage()
+        ],
+            $e->getCode()
+        );
     } else if ($e->getCode() === 401) {
         return response()->json('401'.$e->getMessage(), $e->getCode());
     }
